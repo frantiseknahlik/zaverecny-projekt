@@ -1,1 +1,1 @@
-﻿Console.WriteLine("Druhe Pololeti");
+﻿// BankApp
