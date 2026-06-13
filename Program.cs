@@ -6,8 +6,7 @@ bank.AddAccount(new CheckingAccount("123456", "Jan Novák", 10000, 5000));
 bank.AddAccount(new SavingsAccount("654321", "Jana Nováková", 20000, 0.02m));
 
 Console.WriteLine("=== Vítejte v BankApp ===");
-Console.WriteLine("Příkazy: seznam, vybrat, vklad, vyber, prevod, historie, export, mesic, statistiky, exit");
-
+Console.WriteLine("Příkazy: seznam, vybrat, novy, vklad, vyber, prevod, historie, export, mesic, statistiky, exit");
 string? currentAccountNumber = null;
 
 while (true)
@@ -103,6 +102,46 @@ while (true)
                 bank.PrintStatistics(currentAccountNumber);
             }
             catch (Exception e) { Console.WriteLine(e.Message); }
+            break;
+        
+        
+        case "novy":
+            Console.Write("Číslo účtu: ");
+            string? newNumber = Console.ReadLine()?.Trim();
+            if (string.IsNullOrEmpty(newNumber)) { Console.WriteLine("Neplatné číslo účtu."); break; }
+            if (bank.FindAccount(newNumber) != null) { Console.WriteLine("Účet s tímto číslem už existuje."); break; }
+    
+            Console.Write("Jméno majitele: ");
+            string? newOwner = Console.ReadLine()?.Trim();
+            if (string.IsNullOrEmpty(newOwner)) { Console.WriteLine("Neplatné jméno."); break; }
+    
+            Console.Write("Počáteční zůstatek: ");
+            if (!decimal.TryParse(Console.ReadLine(), out decimal initialBalance))
+            { Console.WriteLine("Neplatná částka."); break; }
+    
+            Console.Write("Typ účtu (bezny/sporici): ");
+            string? accountType = Console.ReadLine()?.Trim().ToLower();
+    
+            if (accountType == "bezny")
+            {
+                Console.Write("Limit kontokorentu: ");
+                if (!decimal.TryParse(Console.ReadLine(), out decimal overdraft))
+                { Console.WriteLine("Neplatný limit."); break; }
+                bank.AddAccount(new CheckingAccount(newNumber, newOwner, initialBalance, overdraft));
+                Console.WriteLine("Běžný účet vytvořen.");
+            }
+            else if (accountType == "sporici")
+            {
+                Console.Write("Úroková sazba (např. 0.02 = 2%): ");
+                if (!decimal.TryParse(Console.ReadLine(), out decimal rate))
+                { Console.WriteLine("Neplatná sazba."); break; }
+                bank.AddAccount(new SavingsAccount(newNumber, newOwner, initialBalance, rate));
+                Console.WriteLine("Spořicí účet vytvořen.");
+            }
+            else
+            {
+                Console.WriteLine("Neznámý typ účtu.");
+            }
             break;
         
         
