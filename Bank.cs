@@ -77,4 +77,42 @@ public class Bank
         Console.WriteLine("Čas posunut o měsíc. Úroky byly připsány na spořicí účty.");
     }
     
+    
+    public void PrintStatistics(string accountNumber)
+    {
+        Account? account = FindAccount(accountNumber);
+        if (account == null)
+            throw new ArgumentException($"Účet {accountNumber} neexistuje.");
+
+        var transactions = account.Transactions;
+    
+        if (transactions.Count == 0)
+        {
+            Console.WriteLine("Žádné transakce.");
+            return;
+        }
+
+        decimal totalDeposits = 0;
+        decimal totalWithdrawals = 0;
+        decimal highest = 0;
+
+        foreach (var t in transactions)
+        {
+            if (t.Type == "Vklad")
+                totalDeposits += t.Amount;
+            else if (t.Type == "Výběr")
+            {
+                totalWithdrawals += t.Amount;
+                if (t.Amount > highest)
+                    highest = t.Amount;
+            }
+        }
+
+        Console.WriteLine($"=== Statistiky účtu {accountNumber} ===");
+        Console.WriteLine($"Celkové vklady:  {totalDeposits:F2} Kč");
+        Console.WriteLine($"Celkové výběry:  {totalWithdrawals:F2} Kč");
+        Console.WriteLine($"Nejvyšší výběr:  {highest:F2} Kč");
+        Console.WriteLine($"Počet transakcí: {transactions.Count}");
+    }
+    
 }
