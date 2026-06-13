@@ -6,7 +6,7 @@ bank.AddAccount(new CheckingAccount("123456", "Jan Novák", 10000, 5000));
 bank.AddAccount(new SavingsAccount("654321", "Jana Nováková", 20000, 0.02m));
 
 Console.WriteLine("=== Vítejte v BankApp ===");
-Console.WriteLine("Příkazy: seznam, vybrat, vklad, vyber, prevod, historie, export, exit");
+Console.WriteLine("Příkazy: seznam, vybrat, vklad, vyber, prevod, historie, export, mesic, exit");
 
 string? currentAccountNumber = null;
 
@@ -90,6 +90,12 @@ while (true)
             catch (Exception e) { Console.WriteLine(e.Message); }
             break;
 
+        
+        case "mesic":
+            bank.AdvanceMonth();
+            break;
+        
+        
         case "exit":
             Console.WriteLine("Nashledanou!");
             return;

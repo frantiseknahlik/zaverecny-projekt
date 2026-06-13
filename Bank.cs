@@ -67,4 +67,14 @@ public class Bank
         Console.WriteLine($"Výpis uložen do souboru: {fileName}");
     }
     
+    public void AdvanceMonth()
+    {
+        foreach (var account in _accounts)
+        {
+            if (account is SavingsAccount savings)
+                savings.ApplyInterest();
+        }
+        Console.WriteLine("Čas posunut o měsíc. Úroky byly připsány na spořicí účty.");
+    }
+    
 }
