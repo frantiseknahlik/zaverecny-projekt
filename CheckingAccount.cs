@@ -1,10 +1,4 @@
 namespace BankApp;
-
-public interface IOverdraftable
-{
-    decimal OverdraftLimit { get; }
-}
-
 public class CheckingAccount : Account, IOverdraftable
 {
     public decimal OverdraftLimit { get; }
