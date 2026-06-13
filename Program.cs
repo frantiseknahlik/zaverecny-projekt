@@ -6,7 +6,7 @@ bank.AddAccount(new CheckingAccount("123456", "Jan Novák", 10000, 5000));
 bank.AddAccount(new SavingsAccount("654321", "Jana Nováková", 20000, 0.02m));
 
 Console.WriteLine("=== Vítejte v BankApp ===");
-Console.WriteLine("Příkazy: seznam, vybrat, vklad, vyber, prevod, historie, exit");
+Console.WriteLine("Příkazy: seznam, vybrat, vklad, vyber, prevod, historie, export, exit");
 
 string? currentAccountNumber = null;
 
@@ -79,6 +79,15 @@ while (true)
         case "historie":
             if (currentAccountNumber == null) { Console.WriteLine("Nejprve vyberte účet."); break; }
             bank.FindAccount(currentAccountNumber)!.PrintHistory();
+            break;
+        
+        case "export":
+            if (currentAccountNumber == null) { Console.WriteLine("Nejprve vyberte účet."); break; }
+            try
+            {
+                bank.ExportHistory(currentAccountNumber);
+            }
+            catch (Exception e) { Console.WriteLine(e.Message); }
             break;
 
         case "exit":

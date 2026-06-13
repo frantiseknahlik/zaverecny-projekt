@@ -45,4 +45,26 @@ public class Bank
         from.Withdraw(amount);
         to.Deposit(amount);
     }
+    
+    public void ExportHistory(string accountNumber)
+    {
+        Account? account = FindAccount(accountNumber);
+        if (account == null)
+            throw new ArgumentException($"Účet {accountNumber} neexistuje.");
+
+        string fileName = $"vypis_{accountNumber}_{DateTime.Now:yyyy-MM-dd_HH-mm}.txt";
+    
+        using StreamWriter writer = new StreamWriter(fileName);
+        writer.WriteLine($"=== Výpis účtu {account.AccountNumber} ===");
+        writer.WriteLine($"Majitel: {account.OwnerName}");
+        writer.WriteLine($"Aktuální zůstatek: {account.Balance:F2} Kč");
+        writer.WriteLine($"Datum výpisu: {DateTime.Now:dd.MM.yyyy HH:mm}");
+        writer.WriteLine("-----------------------------------");
+    
+        foreach (var t in account.Transactions)
+            writer.WriteLine(t);
+    
+        Console.WriteLine($"Výpis uložen do souboru: {fileName}");
+    }
+    
 }
