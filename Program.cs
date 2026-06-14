@@ -6,7 +6,7 @@ bank.AddAccount(new CheckingAccount("123456", "Jan Novák", 10000, 5000));
 bank.AddAccount(new SavingsAccount("654321", "Jana Nováková", 20000, 0.02m));
 
 Console.WriteLine("=== Vítejte v BankApp ===");
-Console.WriteLine("Příkazy: seznam, vybrat, novy, vklad, vyber, prevod, historie, export, mesic, statistiky, exit");
+Console.WriteLine("Neznámý příkaz. Dostupné příkazy: seznam, vybrat, novy, vklad, vyber, prevod, historie, export, mesic, statistiky, exit");
 string? currentAccountNumber = null;
 
 while (true)
