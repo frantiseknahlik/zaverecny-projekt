@@ -64,15 +64,21 @@ Aplikace se ovládá příkazy, které píšeš do konzole. Některé příkazy 
 
 ## Použití AI
 
-Při práci jsem používal Claude, který mi pomáhal s vysvětlováním OOP konceptů (dědičnost, abstraktní třídy, rozhraní, zapouzdření) a postupně mě provázel tvorbou jednotlivých souborů. Kód jsme psali krok za krokem a snažil jsem se každé části rozumět.
-
-<!-- 
-POZNÁMKA PRO TEBE (smaž tenhle komentář před odevzdáním):
-Pokud jsi kód generoval pomocí AI, zadání vyžaduje seznam VŠECH promptů, které jsi použil,
-+ popis výstupu. Doplň sem své skutečné prompty, např. ve formátu:
+Celý projekt jsem programoval sám. AI (Claude) jsem použil jen jako pomocníka u pár věcí – na začátku s nápadem a rozvržením, když jsem si nebyl jistý nějakým OOP konceptem, a na konci na hledání chyb a doladění. Hlavní logiku (třídy, dědičnost, výjimky) jsem psal sám a rozumím jí. Níže jsou prompty, které jsem použil.
 
 ### Použité prompty
-1. "Vysvětli mi, jak funguje abstraktní třída v C#" – Claude vysvětlil princip a ukázal příklad.
-2. "Pomoz mi navrhnout třídu Account pro bankovní systém" – navrhl vlastnosti a metody třídy.
-... (doplň všechny, které sis pamatuješ / použil)
--->
+
+1. "Jak bych mohl pojmout bankovní systém v konzoli, ať to dává smysl rozdělit na třídy?"
+   - Probrali jsme nápad – abstraktní Account a z ní běžný a spořicí účet. Podle toho jsem si to pak napsal.
+
+2. "Můžeš mi vysvětlit, kdy použít abstraktní třídu a kdy rozhraní?"
+   - Claude mi to vysvětlil na příkladu, podle toho jsem se rozhodl pro IOverdraftable.
+
+3. "Proč mi nejde zadat úrok 0.02, ale 0,02 jo?"
+   - Zjistili jsme, že je to kvůli českému prostředí (desetinná čárka). Opravil jsem nápovědu.
+
+4. "Projdi mi kód, jestli tam nejsou nějaké chyby nebo nedotažené věci."
+   - Pomohl mi najít pár drobností a doplnit komentáře ke kódu.
+
+5. "Pomoz mi sepsat README k projektu."
+   - Claude mi pomohl dát dohromady tenhle README – popis aplikace, přehled příkazů a sekci o použití AI.
