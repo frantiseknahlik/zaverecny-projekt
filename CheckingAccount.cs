@@ -1,6 +1,9 @@
 namespace BankApp;
+
+/// Běžný účet s podporou kontokorentu.
 public class CheckingAccount : Account, IOverdraftable
 {
+    /// Maximální povolený záporný zůstatek.
     public decimal OverdraftLimit { get; }
 
     public CheckingAccount(string accountNumber, string ownerName, decimal initialBalance, decimal overdraftLimit)
@@ -8,7 +11,9 @@ public class CheckingAccount : Account, IOverdraftable
     {
         OverdraftLimit = overdraftLimit;
     }
-
+    
+    /// Vybere peníze z účtu. Povoluje záporný zůstatek do výše OverdraftLimit.
+    /// Pokud výběr překročí limit, vyhodí InsufficientFundsException.
     public override void Withdraw(decimal amount)
     {
         if (amount <= 0)

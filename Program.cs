@@ -132,7 +132,7 @@ while (true)
             }
             else if (accountType == "sporici")
             {
-                Console.Write("Úroková sazba (např. 0.02 = 2%): ");
+                Console.Write("Úroková sazba (např. 0,02 = 2%): ");
                 if (!decimal.TryParse(Console.ReadLine(), out decimal rate))
                 { Console.WriteLine("Neplatná sazba."); break; }
                 bank.AddAccount(new SavingsAccount(newNumber, newOwner, initialBalance, rate));

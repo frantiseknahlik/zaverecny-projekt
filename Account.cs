@@ -1,5 +1,7 @@
 namespace BankApp;
 
+/// Abstraktní třída reprezentující bankovní účet.
+/// Každý typ účtu musí dědit z této třídy.
 public abstract class Account
 {
     public string AccountNumber { get; }
@@ -15,7 +17,8 @@ public abstract class Account
         OwnerName = ownerName;
         Balance = initialBalance;
     }
-
+    
+    /// Vloží peníze na účet. Částka musí být kladná.
     public void Deposit(decimal amount)
     {
         if (amount <= 0)
@@ -24,9 +27,12 @@ public abstract class Account
         Balance += amount;
         _transactions.Add(new Transaction(DateTime.Now, "Vklad", amount, Balance));
     }
-
+    
+    /// Výběr peněz z účtu. Každý typ účtu implementuje vlastní logiku.
     public abstract void Withdraw(decimal amount);
 
+
+    /// Vypíše historii všech transakcí na účtu.
     public void PrintHistory()
     {
         if (_transactions.Count == 0)
